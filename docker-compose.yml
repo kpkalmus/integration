@@ -1,0 +1,31 @@
+version: '2'
+
+services:
+
+  #  redis:
+  #  image: redis
+  #    ports:
+  #      - 6379:6379
+
+  crdb:
+    image: cockroachdb/cockroach:latest-v23.1
+    container_name: crdb
+    restart: always
+    command: start-single-node --insecure
+    volumes:
+      - ./crdb:/cockroach/cockroach-data
+      - ./setup/crdb_init/:/docker-entrypoint-initdb.d/
+    ports:
+      - 26257:26257
+      - 8082:8080
+
+  acmq:
+    image: apache/activemq-artemis:2.36.0
+    container_name: acmq
+    restart: always
+    environment:
+      - ARTEMIS_USER=test
+      - ARTEMIS_PASSWORD=test
+    ports:
+      - 61616:61616
+      - 8161:8161
