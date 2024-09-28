@@ -14,7 +14,7 @@ services:
     command: start-single-node --insecure
     volumes:
       - ./crdb:/cockroach/cockroach-data
-      - ./setup/crdb_init/:/docker-entrypoint-initdb.d/
+      - ./crdb_init2/:/docker-entrypoint-initdb.d/
     ports:
       - 26257:26257
       - 8082:8080
