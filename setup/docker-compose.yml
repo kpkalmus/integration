@@ -1,5 +1,3 @@
-version: '2'
-
 services:
 
   redis:
@@ -14,10 +12,10 @@ services:
     command: start-single-node --insecure
     volumes:
       - ./crdb:/cockroach/cockroach-data
-      - ./crdb_init2/:/docker-entrypoint-initdb.d/
+      - ./crdb_init/:/docker-entrypoint-initdb.d/
     ports:
       - 26257:26257
-      - 8082:8080
+      - 9080:8080
 
   acmq:
     image: apache/activemq-artemis:2.36.0
