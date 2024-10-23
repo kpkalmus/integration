@@ -11,7 +11,7 @@ services:
     restart: always
     command: start-single-node --insecure
     volumes:
-      - ./crdb:/cockroach/cockroach-data
+      - crdb:/cockroach/cockroach-data
       - ./crdb_init/:/docker-entrypoint-initdb.d/
     ports:
       - 26257:26257
@@ -27,3 +27,6 @@ services:
     ports:
       - 61616:61616
       - 8161:8161
+
+volumes:
+  crdb:
