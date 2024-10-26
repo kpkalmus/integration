@@ -12,7 +12,7 @@ services:
     command: start-single-node --insecure
     volumes:
       - crdb:/cockroach/cockroach-data
-      - ./crdb_init/:/docker-entrypoint-initdb.d/
+      - ./crdb_init/:/docker-entrypoint-initdb.d/:ro
     ports:
       - 26257:26257
       - 9080:8080
@@ -45,6 +45,15 @@ services:
       - ./crawler/:/crawler/
     ports:
       - 8082:8080
+
+  regsitry:
+    image: qa-api.tortuga-security.com/tortuga-website-monitor/registry:0.0.1
+    container_name: registry
+    restart: always
+    environment:
+      PROFILE: local
+    ports:
+      - 8083:8080
 
 volumes:
   crdb:
